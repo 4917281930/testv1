@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>killer whales</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #00f0f0; /* Brighter cyan */
+            --dark-blue: #003366;
+            --mid-blue: #00aadd; /* Brighter mid blue */
+            --light-blue: #66ddff; /* Brighter light blue */
+            --bg-color: #000033;
+            --glow-intensity: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--primary-blue);
+            font-family: 'VT323', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(0, 51, 102, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 51, 102, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            /* Better scrolling performance */
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .glitch-wrapper {
+            position: relative;
+            text-align: center;
+            margin-bottom: 40px;
+            /* Better performance with will-change */
+            will-change: transform;
+        }
+        
+        .glitch {
+            font-family: 'Press Start 2P', monospace;
+            font-size: clamp(1.8rem, 4vw, 2.5rem); /* Responsive font size */
+            text-transform: lowercase;
+            position: relative;
+            color: var(--primary-blue);
+            letter-spacing: 3px;
+            text-shadow: 
+                0 0 5px var(--primary-blue),
+                0 0 10px var(--primary-blue),
+                0 0 15px var(--primary-blue);
+            animation: glitch 3s ease-in-out infinite;
+            /* Performance optimization */
+            will-change: transform;
+            transform: translateZ(0);
+        }
+        
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translate(0); }
+            20% { transform: translate(-1px, 1px); }
+            40% { transform: translate(-1px, -1px); }
+            60% { transform: translate(1px, 1px); }
+            80% { transform: translate(1px, -1px); }
+        }
+        
+        .scanline {
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-blue), transparent);
+            opacity: 0.4;
+            position: absolute;
+            top: 50%;
+            animation: scanline 8s linear infinite;
+            /* Performance optimization */
+            will-change: transform;
+        }
+        
+        @keyframes scanline {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { top: 100%; opacity: 0; }
+        }
+        
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
+            background: linear-gradient(135deg, rgba(0, 10, 30, 0.8), rgba(0, 20, 40, 0.6));
+            padding: 30px;
+            border: 2px solid var(--mid-blue);
+            border-radius: 8px;
+            box-shadow: 
+                0 0 20px rgba(0, 240, 240, 0.3),
+                inset 0 0 20px rgba(0, 240, 240, 0.1);
+            backdrop-filter: blur(5px);
+            /* Smooth hover transition */
+            transition: all 0.3s ease;
+        }
+        
+        .profile-section:hover {
+            box-shadow: 
+                0 0 30px rgba(0, 240, 240, 0.4),
+                inset 0 0 25px rgba(0, 240, 240, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .profile-box {
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.4), rgba(0, 77, 153, 0.2));
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px dashed var(--light-blue);
+            max-width: 800px;
+            text-align: left;
+            font-size: clamp(16px, 2.5vw, 18px); /* Responsive text */
+            backdrop-filter: blur(3px);
+        }
+        
+        .profile-box p {
+            margin-bottom: 15px;
+            /* Better text rendering */
+            text-rendering: optimizeLegibility;
+        }
+        
+        .profile-box h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            margin-bottom: 20px;
+            color: var(--light-blue);
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--light-blue);
+        }
+        
+        .identity-tag {
+            margin-top: 10px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: var(--light-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: blink 2s ease-in-out infinite;
+            text-shadow: 0 0 8px var(--light-blue);
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        .crypto-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            order: -1;
+        }
+        
+        .badge {
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.7), rgba(0, 77, 153, 0.5));
+            padding: 12px 20px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 4px;
+            color: var(--primary-blue);
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            display: inline-block;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 240, 240, 0.4);
+            transition: all 0.3s ease;
+            cursor: default;
+            text-shadow: 0 0 5px var(--primary-blue);
+        }
+        
+        .badge:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 240, 240, 0.6);
+            background: linear-gradient(135deg, rgba(0, 77, 153, 0.8), rgba(0, 102, 204, 0.6));
+        }
+        
+        .badges-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .sns-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .sns-handle {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--light-blue);
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .sns-handle a {
+            color: inherit;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 5px var(--light-blue);
+        }
+        
+        .sns-handle a:hover {
+            background: rgba(102, 221, 255, 0.1);
+            transform: scale(1.05);
+            text-shadow: 0 0 15px var(--light-blue);
+        }
+        
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .telegram-link {
+            position: fixed; /* Changed to fixed for better accessibility */
+            bottom: 30px;
+            left: 30px; /* Moved to left */
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            background: rgba(0, 51, 102, 0.8);
+            border-radius: 50%;
+            border: 2px solid var(--primary-blue);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .telegram-link:hover {
+            transform: scale(1.2);
+            background: rgba(0, 77, 153, 0.9);
+            box-shadow: 0 0 20px rgba(0, 240, 240, 0.8);
+        }
+        
+        .telegram-icon {
+            width: 28px;
+            height: 28px;
+            filter: drop-shadow(0 0 8px var(--primary-blue));
+            transition: all 0.3s ease;
+        }
+        
+        .vhs-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1),
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 3px
+            );
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0.2;
+        }
+        
+        .noise::before {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            content: "";
+            opacity: 0.03;
+            z-index: 1000;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            animation: noise 0.3s infinite;
+        }
+
+        @keyframes noise {
+            0%, 100% { transform: translate(0, 0) }
+            25% { transform: translate(-0.5px, -0.5px) }
+            50% { transform: translate(0.5px, 0.5px) }
+            75% { transform: translate(-0.5px, 0.5px) }
+        }
+        
+        /* Enhanced binary rain effect - denser and covers entire site */
+        .binary-rain {
+            position: fixed;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: calc(100% + 200px);
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+        
+        .binary-column {
+            position: absolute;
+            top: -100px;
+            color: var(--primary-blue);
+            font-family: 'VT323', monospace;
+            font-size: 14px;
+            opacity: 0.4;
+            text-shadow: 0 0 3px var(--primary-blue);
+            animation: rain linear infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            letter-spacing: 0;
+            line-height: 1.1;
+            will-change: transform;
+        }
+        
+        @keyframes rain {
+            0% {
+                transform: translateY(-150px);
+                opacity: 0;
+            }
+            5% {
+                opacity: 0.4;
+            }
+            95% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(calc(100vh + 150px));
+                opacity: 0;
+            }
+        }
+        
+        .binary-digit {
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Bottom links section */
+        .bottom-links {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px solid var(--mid-blue);
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(0, 10, 30, 0.7), rgba(0, 20, 40, 0.5));
+            box-shadow: 0 0 15px rgba(0, 240, 240, 0.3);
+            margin-bottom: 40px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        
+        .bottom-links:hover {
+            box-shadow: 0 0 25px rgba(0, 240, 240, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .bottom-links .sns-handle {
+            margin-bottom: 10px;
+        }
+        
+        /* Loading animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-text {
+            font-family: 'Press Start 2P', monospace;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px var(--primary-blue);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Hide loading overlay when page is loaded */
+        .loaded .loading-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* Responsive optimizations */
+        @media (max-width: 767px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .profile-section, .profile-box {
+                padding: 20px;
+            }
+            
+            .crypto-badges {
+                gap: 10px;
+            }
+            
+            .badge {
+                padding: 10px 15px;
+            }
+            
+            .binary-column {
+                opacity: 0.25;
+                font-size: 12px;
+            }
+            
+            .telegram-link {
+                bottom: 20px;
+                left: 20px; /* Changed to left */
+                width: 45px;
+                height: 45px;
+            }
+            
+            .telegram-icon {
+                width: 24px;
+                height: 24px;
+            }
+        }
+        
+        /* Performance optimizations */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-blue: #00f5f5;
+                --light-blue: #77eeff;
+            }
+        }
+    </style>
+</head>
+<body class="noise">
+    <!-- Loading overlay -->
+    <div class="loading-overlay">
+        <div class="loading-text">INITIALIZING...</div>
+    </div>
+    
+    <div class="vhs-effect"></div>
+    <div class="scanline"></div>
+    <div class="binary-rain" id="binary-rain"></div>
+    
+    <div class="container">
+        <div class="glitch-wrapper">
+            <h1 class="glitch">killer whales</h1>
+            <div class="identity-tag">[ crypto explorer | silent observer ]</div>
+            
+            <div class="crypto-badges">
+                <div class="badges-row">
+                    <div class="badge">crypto trader</div>
+                    <div class="badge">airdrop hunter</div>
+                </div>
+                <div class="badges-row">
+                    <div class="badge">validator</div>
+                    <div class="badge">strategist</div>
+                    <div class="badge">freedom life</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-section">
+            <div class="profile-box">
+                <h2>// identity profile</h2>
+                <p>An anonymous entity in the crypto realm, operating under the moniker "killer whales". Just another swimmer in the vast digital ocean, learning and growing with each market wave.</p>
+                
+                <p>Studying market patterns and blockchain ecosystems with quiet dedication. Fortunate to have encountered opportunities in trading and airdrops through patient observation rather than any special insight.</p>
+                
+                <p>Running validator nodes as a small contribution to network security and decentralization. Grateful to be part of the emerging world of digital assets and blockchain technology.</p>
+                
+                <p>Owner of killerwhales.sats and killerwhaleslabs.sats on Bitcoin, not by exceptional merit but through fortunate timing and community support.</p>
+            </div>
+        </div>
+        
+        <div class="bottom-links">
+            <div class="sns-handle">
+                <a href="https://ordinals.com/inscription/52199732cdedfdb6bef0b6cead32ed9389beb14e40bb554eda6a812f773fac12i0" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="Visit killerwhales.sats ordinal">
+                   killerwhales.sats
+                </a>
+            </div>
+            <div class="sns-handle">
+                <a href="https://ordinals.com/inscription/3de542702e8f24ee4c40ece613a49aa0147cfbb772ca88abf68039a3497f123di0" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="Visit killerwhaleslabs.sats ordinal">
+                   killerwhaleslabs.sats
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <a href="https://t.me/killerwhales_user" 
+           class="telegram-link" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           aria-label="Contact via Telegram">
+            <svg class="telegram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.155l-1.98 9.327c-.146.658-.538.818-1.084.51l-3-2.21-1.445 1.394c-.16.16-.295.295-.603.295l.213-3.053 5.56-5.023c.242-.213-.054-.334-.373-.12l-6.87 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.538-.196 1.006.128.838.892z"/>
+            </svg>
+        </a>
+    </footer>
+    
+    <script>
+        // Performance optimized script
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove loading overlay
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 1000);
+            
+            // Enhanced binary rain - denser and covers entire site
+            const binaryRain = document.getElementById('binary-rain');
+            const screenWidth = window.innerWidth;
+            const isMobile = screenWidth < 768;
+            const columnSpacing = isMobile ? 8 : 6; // Much denser spacing
+            const numColumns = Math.floor(screenWidth / columnSpacing);
+            
+            // More columns for denser effect
+            const maxColumns = isMobile ? Math.min(numColumns, 80) : numColumns;
+            
+            // Create binary columns with staggered timing
+            for (let i = 0; i < maxColumns; i++) {
+                setTimeout(() => createBinaryColumn(i), i * 20);
+            }
+            
+            function createBinaryColumn(index) {
+                const column = document.createElement('div');
+                column.className = 'binary-column';
+                column.style.left = `${(index * columnSpacing) + Math.random() * 3}px`;
+                
+                // Varied animation duration for natural flow
+                const duration = 12 + Math.random() * 16;
+                column.style.animationDuration = `${duration}s`;
+                column.style.animationDelay = `${Math.random() * 5}s`;
+                
+                // Create longer binary content for full coverage
+                const length = isMobile ? 25 + Math.floor(Math.random() * 40) : 35 + Math.floor(Math.random() * 50);
+                const isBrighter = Math.random() < 0.3;
+                
+                if (isBrighter) {
+                    column.style.opacity = '0.6';
+                    column.style.textShadow = '0 0 6px var(--primary-blue)';
+                }
+                
+                const pattern = Math.random() < 0.5 ? 0.3 : 0.7;
+                let contentHTML = '';
+                
+                for (let j = 0; j < length; j++) {
+                    const digit = Math.random() < pattern ? '1' : '0';
+                    contentHTML += `<span class="binary-digit">${digit}</span>`;
+                }
+                
+                column.innerHTML = contentHTML;
+                
+                // Speed variation for more natural flow
+                if (Math.random() < 0.4) {
+                    column.style.animationDuration = `${duration * 0.6}s`;
+                } else if (Math.random() < 0.2) {
+                    column.style.animationDuration = `${duration * 1.4}s`;
+                }
+                
+                binaryRain.appendChild(column);
+            }
+            
+            // Continuous creation of new columns for endless flow
+            setInterval(() => {
+                if (document.querySelectorAll('.binary-column').length < maxColumns) {
+                    const randomIndex = Math.floor(Math.random() * maxColumns);
+                    createBinaryColumn(randomIndex);
+                }
+            }, 2000);
+            
+            // Intersection Observer for performance
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    } else {
+                        entry.target.style.animationPlayState = 'paused';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe animated elements
+            document.querySelectorAll('.glitch, .binary-column').forEach(el => {
+                observer.observe(el);
+            });
+        });
+        
+        // Optimize scroll performance with parallax effect
+        let ticking = false;
+        function updateScrollEffects() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.3;
+            
+            document.querySelector('.binary-rain').style.transform = `translateY(${rate}px)`;
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollEffects);
+                ticking = true;
+            }
+        });
+        
+        // Error handling for font loading
+        document.fonts.ready.then(function() {
+            console.log('Fonts loaded successfully');
+        }).catch(function(error) {
+            console.warn('Font loading failed:', error);
+        });
+    </script>
+</body>
+</html>
